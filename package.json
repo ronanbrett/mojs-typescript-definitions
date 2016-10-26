@@ -1,0 +1,19 @@
+{
+  "name": "mojs-typescript-declaration",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ao21/mojs-typescript-definitions.git"
+  },
+  "author": "Ro Brett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ao21/mojs-typescript-definitions/issues"
+  },
+  "homepage": "https://github.com/Ao21/mojs-typescript-definitions#readme"
+}
