@@ -4,6 +4,11 @@ declare module 'mo-js' {
         constructor();
     }
 
+    export function addShape(shapeName: string, shape: CustomShape);
+
+    export class CustomShape {
+    }  
+    
     export interface LinearEase {
         none();
     }
@@ -175,13 +180,13 @@ declare module 'mo-js' {
          *  Stroke Dash Array.
          *  {String, Number}
          */
-        strokeDasharray?: string | number;
+        strokeDasharray?: string | number | {};
 
         /**
          *  Stroke Dash Offset.
          *  {String, Number}
          */
-        strokeDashoffset?: string | number;
+        strokeDashoffset?: string | number | {};
 
         /**
          *  Fill Color.
@@ -286,13 +291,13 @@ declare module 'mo-js' {
          *  Radius X of the shape (fallbacks to `radius`).
          *  {Number, String}
          */
-        radiusX?: number | string;
+        radiusX?: number | string| any;
 
         /**
          *  Radius Y of the shape (fallbacks to `radius`).
          *  {Number, String}
          */
-        radiusY?: number | string;
+        radiusY?: number | string | any;
 
         /**
          *  If should hide module with `transforms` instead of `display`.
