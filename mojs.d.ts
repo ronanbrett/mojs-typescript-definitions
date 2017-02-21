@@ -1,52 +1,35 @@
-declare module 'mo-js' {
+declare module "mo-js" {
+    export = mojs;
+}
 
-    export class Module {
-        constructor();
+declare namespace mojs {
+
+    class Shape extends Tunable {
+        constructor(opts: ShapeOptions);
     }
 
-    export interface LinearEase {
+    class Module {
+        constructor(opts?: any);
+    }
+    interface CustomShape { }
+
+    /** Easing */
+    interface LinearEase {
         none();
     }
 
-    export interface DefaultEasing {
+    interface DefaultEasing {
         in(p: any);
         out(p: any);
         inout(p: any);
     }
 
-    export class easing {
-        static bezier(...args);
-        static mix(...args);
-        static path(path: string);
-        static approximate(slowEasing: any);
-        static inverse();
-        static linear: DefaultEasing;
-        static ease: DefaultEasing;
-        static sin: DefaultEasing;
-        static quad: DefaultEasing;
-        static cubic: DefaultEasing;
-        static quart: DefaultEasing;
-        static quint: DefaultEasing;
-        static expo: DefaultEasing;
-        static circ: DefaultEasing;
-        static back: DefaultEasing;
-        static elastic: DefaultEasing;
-        static bounce: DefaultEasing;
 
-    }
-
-    export class h {
-        static NS();
-        static logBadgeCss();
-        static force3d(el: any);
-
-    }
-
-    export class Tweenable extends Module {
+    class Tweenable extends Module {
         /**
-         *  Starts playback.
-         *  @param shift {Number} Start progress shift in milliseconds.
-         */
+        *  Starts playback.
+        *  @param shift {Number} Start progress shift in milliseconds.
+        */
         play(shift?: number);
 
         /**
@@ -95,20 +78,14 @@ declare module 'mo-js' {
          */
         reset();
     }
-
-    export class Thenable extends Tweenable {
+    class Thenable {
         /**
          *  Creates next state transition chain.
          */
         then(o: Object): this;
-
-
     }
-
-    export class Tunable extends Thenable {
-
-
-        /**
+    class Tunable {
+         /**
          *  Tunes start state with new options.
          *  @param options {Object} New start properties.
          */
@@ -118,12 +95,10 @@ declare module 'mo-js' {
          *  Regenerates all randoms in initial properties.
          */
         generate(): this;
-
     }
 
-    export interface ShapeOptions {
-
-        /**
+    interface ShapeOptions {
+         /**
          *  Parent of the module.
          *  {String, Object}
          *  [selector, HTMLElement]
@@ -146,153 +121,153 @@ declare module 'mo-js' {
         /**
          * Stroke color.
          * {String}
-         * [color name, rgb, rgba, hex]
+         * ∆ :: Possible values: [color name, rgb, rgba, hex]
          */
-        stroke?: string;
+        stroke?: string | any | any;
 
         /**
          *  Stroke Opacity.
          *  {Number}
-         *  [ 0..1 ]
+         *  ∆ :: Possible values: [ 0..1 ]
          */
-        strokeOpacity?: number;
+        strokeOpacity?: number | any;
 
         /**
          *  Stroke Line Cap.
          *  {String}
          *  ['butt' | 'round' | 'square']
          */
-        strokeLinecap?: string;
+        strokeLinecap?: string | any;
 
         /**
          *  Stroke Width.
          *  {Number}
-         *  [ number ]
+         *  ∆ :: Possible values: [ number ]
          */
-        strokeWidth?: number;
+        strokeWidth?: number | { [delta: string]: string };
 
         /**
          *  Stroke Dash Array.
-         *  {String, Number}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        strokeDasharray?: string | number;
+        strokeDasharray?: string | number | { [delta: string]: string } | { [delta: string]: string };
 
         /**
          *  Stroke Dash Offset.
-         *  {String, Number}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        strokeDashoffset?: string | number;
+        strokeDashoffset?: string | number | { [delta: string]: string } | { [delta: number]: number };
 
         /**
          *  Fill Color.
          *  {String}
-         *  [color name, rgb, rgba, hex]
+         *  ∆ :: Possible values: [color name, rgb, rgba, hex]
          */
-        fill?: string;
+        fill?: string | { [delta: string]: string } | any;
 
         /**
          *  Fill Opacity.
          *  {Number}
-         *  [ 0..1 ]
+         *  ∆ :: Possible values: [ 0..1 ]
          */
-        fillOpacity?: number;
+        fillOpacity?: number | { [delta: number]: number };
 
         /**
          *  Left position of the module.
-         *  {Number, String}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        left?: string | number;
+        left?: string | number | { [delta: string]: string };
 
         /**
          *  Top position of the module.
-         *  {Number, String}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        top?: string | number;
+        top?: string | number | { [delta: string]: string };
 
         /**
          *  X shift.
-         *  {Number, String}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        x?: number | string | {};
+        x?: number | string | { [delta: string]: number | string };
 
         /**
          *  Y shift.
-         *  {Number, String}
+         *  ∆ :: Possible values: [ number ]
          */
-        y?: number | string | {};
+        y?: number | { [delta: string]: number };
 
         /**
          *  Angle.
-         *  {Number, String}
+         *  ∆ :: Possible values: [ number ]
          */
-        angle?: number | string | {};
+        angle?: number | string | { [delta: string]: number };
 
         /**
          *  Scale of the module.
-         *  {Number}
+         *  ∆ :: Possible values: [ number ]
          */
-        scale?: number | {};
+        scale?: number | { [delta: string]: number };
 
         /**
          *  Explicit scaleX value (fallbacks to `scale`).
-         *  {Number}
+         *  ∆ :: Possible values: [ number ].
          */
-        scaleX?: number | {};
+        scaleX?: number | { [delta: string]: number };
 
         /**
          *  Explicit scaleX value (fallbacks to `scale`).
-         *  {Number}
+         *  ∆ :: Possible values: [ number ].
          */
-        scaleY?: number | {};
+        scaleY?: number | { [delta: string]: number };
 
         /**
          *  Origin for `x`, `y`, `scale`, `rotate` properties.
-         *  {String}
+         *  ∆ :: Possible values: [ number, string ]
          */
-        origin?: string;
+        origin?: string | { [delta: string]: number | string };
 
         /**
          *  Opacity.
          *  {Number}
-         *  [ 0..1 ]
+         *  ∆ :: Possible values: [ 0..1 ]
          */
-        opacity?: number | {};
+        opacity?: number | { [delta: string]: number };
 
         /**
          *  X border radius.
-         *  {Number, String}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        rx?: number | string;
+        rx?: number | string | { [delta: string]: number | string };
 
         /**
          *  Y border radius.
-         *  {Number, String}
+         *  ∆ :: Units :: Possible values: [ number, string ]
          */
-        ry?: number | string;
+        ry?: number | string | { [delta: string]: number | string };
 
         /**
          *  Points count ( for polygon, zigzag, equal ).
-         *  {Number, String}
+         *  ∆ :: Possible values: [ number ]
          */
-        points?: number | string;
+        points?: number | string | { [delta: string]: number };
 
         /**
          *  Radius of the shape.
-         *  {Number, String}
+         *  ∆ :: Possible values: [ number ]
          */
-        radius?: number | string;
+        radius?: number | string | { [delta: string]: number };
 
         /**
          *  Radius X of the shape (fallbacks to `radius`).
-         *  {Number, String}
+         *  ∆ :: Possible values: [ number ]
          */
-        radiusX?: number | string;
+        radiusX?: number | string | { [delta: string]: number };
 
         /**
          *  Radius Y of the shape (fallbacks to `radius`).
-         *  {Number, String}
+         *  ∆ :: Possible values: [ number ]
          */
-        radiusY?: number | string;
+        radiusY?: number | string | { [delta: string]: number };
 
         /**
          *  If should hide module with `transforms` instead of `display`.
@@ -351,7 +326,7 @@ declare module 'mo-js' {
          *  {Number}
          *  [0..∞]
          */
-        speed?: number| any;
+        speed?: number | any;
 
         /**
          *  If the progress should be flipped on repeat animation end
@@ -438,13 +413,40 @@ declare module 'mo-js' {
          */
         onPlaybackComplete?: () => any;
 
+        width?: any;
+        height?: any;
     }
 
-    export class Shape extends Tunable {
-        constructor(opts: ShapeOptions);
+    class easing {
+         static bezier(...args);
+         static mix(...args);
+         static path(path: string);
+         static approximate(slowEasing: any);
+         static inverse();
+         static linear: DefaultEasing;
+         static ease: DefaultEasing;
+         static sin: DefaultEasing;
+         static quad: DefaultEasing;
+         static cubic: DefaultEasing;
+         static quart: DefaultEasing;
+         static quint: DefaultEasing;
+         static expo: DefaultEasing;
+         static circ: DefaultEasing;
+         static back: DefaultEasing;
+         static elastic: DefaultEasing;
+         static bounce: DefaultEasing;
     }
 
-    export interface HtmlOptions {
+    interface h {
+        NS();
+        logBadgeCss();
+        force3d(el: any);
+
+
+    }
+
+
+    interface HTMLOptions {
         /**
          *  HTMLElement to animate.
          *  {String, Object}
@@ -602,35 +604,58 @@ declare module 'mo-js' {
         onPlaybackComplete?: () => any;
     }
 
-    export class Html extends Thenable {
-        constructor(opts: HtmlOptions);
+    class Html extends Thenable {
+        constructor(opts: HTMLOptions);
     }
 
-    export interface ShapeSwirlOptions extends ShapeOptions{
+
+    interface ShapeSwirlOptions extends ShapeOptions { 
         /**
          *  Diviation size of sine.
-         *  {Number}
+         *  ∆ :: [number > 0] :: Degree size of the sinusoidal path.
          */
-        swirlSize?: number;
+        swirlSize?: number | { [delta: string]: string };
 
         /**
          *  Frequency of sine.
-         *  {Number}
+         *  ∆ :: [number > 0] :: Frequency of the sinusoidal path.
          */
-        swirlFrequency?: number;
+        swirlFrequency?: number | { [delta: string]: number };
 
         /**
          *  Sine length scale.
-         *  {Number}
+         *   ∆ :: [number > 0] :: Sinusoidal path length scale.
          *  [ 0..1 ]
          */
-        pathScale?: number;
+        pathScale?: number | { [delta: string]: number };
 
         /**
          *  Degree shift for sine path.
-         *  {Number}
+         *  ∆ :: [number] :: Degree shift for the sinusoidal path
          */
-        degreeShift?: number;
+        degreeShift?: number | { [delta: string]: number };
+
+        /**
+         *  Radius of the shape
+         *  ∆ :: [number] :: Radius of the shape.
+         */
+
+        radius?: number | { [delta: string]: number };
+
+        /**
+         *   ∆ :: Units :: Possible values: [ number, string ]
+         */
+        x?: number | string | { [delta: string]: number | string };
+
+        /**
+         *  ∆ :: Units :: Possible values: [ number, string ]
+         */
+        y?: number | { [delta: string]: number };
+
+        /**
+         *  ∆ :: Units :: Possible values: [ number ]
+         */
+        scale?: number | { [delta: number]: number };
 
         /**
          *   Directon of sine.
@@ -648,12 +673,12 @@ declare module 'mo-js' {
         isTimelineLess?: boolean;
     }
 
-    export class ShapeSwirl extends Shape {
+    class ShapeSwirl extends Shape {
         constructor(opts: ShapeSwirlOptions);
 
     }
 
-    export interface BurstOptions {
+    interface BurstOptions {
 
         /**
          *  Parent of the module.
@@ -806,11 +831,11 @@ declare module 'mo-js' {
         }
     }
 
-    export class Burst extends Tunable {
+    class Burst extends Tunable {
         constructor(opts: BurstOptions);
-    }
+    }    
 
-    export interface StaggerOptions {
+     interface StaggerOptions {
         /**
          *  quantifier defines number of modules to create
          */
@@ -819,9 +844,9 @@ declare module 'mo-js' {
          *  options for timeline that controls all modules
          */
         timeline: {}
-    }
-
-    export interface TweenOptions {
+     }
+    
+    interface TweenOptions {
         /**
          *  Duration
          */
@@ -937,138 +962,14 @@ declare module 'mo-js' {
         onPlaybackComplete?: () => any;
     }
 
-    export interface TweenOptions {
-        /**
-         *  Duration
-         */
-        duration?: number;
 
-        /**
-         *  Delay
-         */
-        delay?: number;
-
-        /**
-         *  If should repeat after animation finished
-         *  {Number} *(1)
-         */
-        repeat?: number;
-
-        /**
-         *  Speed of the tween
-         *  {Number}
-         *  [0..∞]
-         */
-        speed?: number;
-
-        /**
-         *  If the progress should be flipped on repeat animation end
-         *  {Boolean}
-         */
-        yoyo?: boolean;
-
-        /**
-         *  Easing function
-         *  {String, Function}
-         *  [ easing name, path coordinates, bezier string, easing function ]
-         */
-        easing?: string | Function;
-
-        /**
-         *  Easing function for backward direction of the tween animation (fallbacks to `easing`)
-         *  {String, Function}
-         *  [ easing name, path coordinates, bezier string, easing function ]
-         */
-        backwardEasing?: string | Function;
-
-
-        /**
-         *  Fires on every when progress needs an update. For instance when tween was finished an remains in
-         *  `1` progress state, and you will play it again - it will stay in the `1` state until first sufficient
-         *  update after delay. So the `onRefresh` callback serves you to `refresh` the `1` state with `0` update.
-         *  @param isBefore {Boolean} If `true` - the refresh is before start time.
-         */
-        onRefresh?: (isBefore) => any;
-
-        /**
-         *  Fires on every update of the tween in any period (including delay periods). You probably want to use `onUpdate` method instead.
-         *  @param p {Number} Normal (not eased) progress.
-         *  @param isForward {Boolean} Direction of the progress.
-         *  @param isYoyo {Boolean} If in `yoyo` period.
-         */
-        onProgress?: (progress: number, isForward?: boolean, isYoyo?: boolean) => any;
-
-        /**
-         *  Fires when tween's the progress reaches `0` point in normal or repeat period.
-         *  @param isForward {Boolean} If progress moves in forward direction.
-         *  @param isYoyo {Boolean} If progress inside `yoyo` flip period.
-         */
-        onStart?: (isForward: boolean, isYoyo: boolean) => any;
-
-        /**
-         *  Fires when tween's the progress reaches `0` point in normal or repeat period.
-         *  @param isForward {Boolean} If progress moves in forward direction.
-         *  @param isYoyo {Boolean} If progress inside `yoyo` flip period.
-         */
-        onFirstUpdate?: (isForward, isYoyo) => any;
-
-        /**
-         *  Fires on first update of the tween in sufficiently active period (excluding delay periods).
-         *  @param ep {Number} Eased progress.
-         *  @param p {Number} Normal (not eased) progress
-         *  @param isForward {Boolean} Direction of the progress.
-         *  @param isYoyo {Boolean} If in `yoyo` period.
-         */
-        onUpdate?: (ep, p, isForward, isYoyo) => any;
-
-        /**
-         *  Fires when tween's the progress reaches `1` point in normal or repeat period.
-         *  @param isForward {Boolean} If progress moves in forward direction.
-         *  @param isYoyo {Boolean} If progress inside `yoyo` flip period.
-         */
-        onRepeatComplete?: (isForward, isYoyo) => any;
-
-        /**
-         *  Fires when tween's the entire progress reaches `1` point(doesn't fire in repeat periods).
-         *  @param isForward {Boolean} If progress moves in forward direction.
-         *  @param isYoyo {Boolean} If progress inside `yoyo` flip period.
-         */
-        onComplete?: (isForward, isYoyo) => any;
-
-        /**
-         *  Fires when the `.play` method called and tween isn't in play state yet.
-         */
-        onPlaybackStart?: () => any;
-
-        /**
-         *  Fires when the `.pause` method called and tween isn't in pause state yet.
-         */
-        onPlaybackPause?: () => any;
-
-        /**
-         *  Fires when the `.stop` method called and tween isn't in stop state yet.
-         */
-        onPlaybackStop?: () => any;
-
-        /**
-         *  Fires when the tween end's animation (regardless progress)
-         */
-        onPlaybackComplete?: () => any;
-
-        /**
-         *  Context callbacks will be called with.
-         *  {Object}
-         */
-        callbacksContext?: Object;
-    }
-
-    export class MotionPath {
+    interface MotionPath {
         constructor(opts: any);
         run(any: any);
         run()
     }
 
-    export class Tween extends Module {
+    class Tween extends Module {
 
         constructor(opts: TweenOptions);
         /**
@@ -1124,9 +1025,7 @@ declare module 'mo-js' {
         reset();
     }
 
-
-    export class Timeline extends Tween {
-        constructor();
+    class Timeline extends Tween {
         constructor(opts: TweenOptions);
         /**
          *  API method to add child tweens/timelines.
@@ -1157,11 +1056,18 @@ declare module 'mo-js' {
          */
         reset();
 
+    }    
+
+    function stagger(Shape): any;
+
+
+    interface MojsStatic {
+        CustomShape: ObjectConstructor;
+        addShape(name: string, shape: any);
+        Timeline(): void;
+        Shape(shapeOptions: any): void;
+
+        easing: any;
     }
 
-    export function stagger(Shape): any;
-
-
-
 }
-
