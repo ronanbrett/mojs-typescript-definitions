@@ -8,10 +8,12 @@ declare namespace mojs {
         constructor(opts: ShapeOptions);
     }
 
+    function addShape(name: string, shape: any);
+
     class Module {
         constructor(opts?: any);
     }
-    interface CustomShape { }
+    class CustomShape { }
 
     /** Easing */
     interface LinearEase {
@@ -78,13 +80,13 @@ declare namespace mojs {
          */
         reset();
     }
-    class Thenable {
+    class Thenable extends Tweenable {
         /**
          *  Creates next state transition chain.
          */
         then(o: Object): this;
     }
-    class Tunable {
+    class Tunable extends Thenable {
          /**
          *  Tunes start state with new options.
          *  @param options {Object} New start properties.
@@ -1026,7 +1028,7 @@ declare namespace mojs {
     }
 
     class Timeline extends Tween {
-        constructor(opts: TweenOptions);
+        constructor(opts?: TweenOptions);
         /**
          *  API method to add child tweens/timelines.
          *  @param {Object, Array} Tween/Timeline or an array of such.

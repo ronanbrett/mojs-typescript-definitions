@@ -1,5 +1,5 @@
 {
-  "name": "mojs-typescript-declaration",
+  "name": "@types/mojs",
   "version": "0.0.2",
   "description": "",
   "main": "index.d.ts",
